@@ -83,6 +83,35 @@ b\r\n
 * 过滤html java用spring的 HtmlUtils.htmlEscape php 用 htmlspecialchars
 * 必须输入html的地方 设置标签白名单，解析html重新整理。
 
+## HTTPS流程
+![](media/15015587412678.jpg)
+
+1. 客户端发送`ClientHello`请求到服务器，主要包括以下信息
+
+    > 客户端协议的版本 如TLS 1.0
+    > 支持的加密算法 如RSA
+    > 支持的压缩算法
+    > 一个随机数（1）
+
+2. 服务器回应`SeverHello`,包括以下信息
+
+    > 确认加密协议版本 如TLS 1.0
+    > 确认加密算法
+    > 服务器整数
+    > 一个随机数（2）
+    
+3. 客户端验证证书的有效性，提取证书中的公钥，回复下面三个信息
+    > 用证书中的公钥加密一个 随机数（3）这个随机数也成为 pre-master key
+    > 编码改变通知，表示随后用加密方式通信
+    > 客户端握手结束通知
+    
+4. 最后客户端回复确认消息包括
+    > 编码改变通知
+    > 服务器握手结束通知  
+    
+TLS 详细说明 https://imququ.com/post/optimize-tls-handshake.html
+  
+
 
 
 
